@@ -8,7 +8,6 @@ class Camera(object):
         self.video.release()
 
     def get_fram(self):
-        ret, fram = self.video.read()
-        result, fram_image = cv2.imencode(".jpg", fram)
+        ret, fram = self.video.read() # fram -> ndarray
+        result, fram_image = cv2.imencode(".jpg", fram) # fram_image -> ndarray
         return fram_image.tobytes()
-

@@ -3,20 +3,30 @@ import os
 import requests
 import numpy
 import time
+import datetime
 from PIL import Image, ImageDraw
 from io import BytesIO
 from azure.cognitiveservices.vision.face import FaceClient
 from msrest.authentication import CognitiveServicesCredentials
 from camera import Camera
 from faceApi import FaceApi
+from firestore import Firestore
+from times import Times
 from flask import Flask, render_template, Response
 
 
 app = Flask(__name__)
 
-
-def gen(camera, faceApi):
+def gen(camera, faceApi, firestore, times):
     count = 0
+    time_count = 1
+    total_time = 0
+    start_time = None
+    end_time = None
+    start_time_ut = None
+    end_time_ut = None
+    study_time = None
+    start_time_day = None
 
     while True:
         fram_image = camera.get_fram()
@@ -26,14 +36,43 @@ def gen(camera, faceApi):
             rect_image, judgment = faceApi.surround_rect(fram_image)
             if judgment == 0: # 未検出
                 if rect_image is not None:
-                    end_time = time.time # 顔検出停止時間
+                    # end_time_utに値が入っていないかつ，start_time_utに値が入っているときのみ実行
+                    if end_time_ut is None and start_time_ut is not None:
+                        end_time = datetime.datetime.now()
+                        date = str(end_time.year) + "年" + str(end_time.month) + "月" + str(end_time.day) + "日" #　現在の日付
+                        end_time = str(end_time.hour) + "時" + str(end_time.minute) + "分"
+                        end_time_ut = time.time() # 顔検出停止Unix時間
+                        study_time = int(end_time_ut - start_time_ut) # 勉強時間を計算
+                        total_time += study_time
+                        study_time = times.convertTime(study_time)
+                        total_time_convert = times.convertTime(total_time)
+
+                        # firestoreに追加
+                        firestore.addDatabese(date, start_time, end_time, study_time, total_time_convert, time_count)
+
+                        # time_countを進める
+                        time_count += 1
+
+                        # 各時間変数の値をNoneで初期化する
+                        start_time = None
+                        end_time = None
+                        start_time_ut = None
+                        end_time_ut = None
+                        study_time = None
+
                     yield (b"--frame\r\n"
                         b"Content-Type: image/jpeg\r\n\r\n" + rect_image + b"\r\n")
                 else:
                     print("rect_image is none")
             else: # 検出
                 if rect_image is not None:
-                    start_time = time.time # 顔検出開始時間
+                    if start_time_ut is None:
+                        start_time =  datetime.datetime.now() # 顔検出時間
+                        if start_time_day != start_time.day:
+                            time_count = 1
+                        start_time_day = start_time.day
+                        start_time = str(start_time.hour) + "時" + str(start_time.minute) + "分"
+                        start_time_ut = time.time() # 顔検出開始Unix時間
                     yield (b"--frame\r\n"
                         b"Content-Type: image/jpeg\r\n\r\n" + rect_image + b"\r\n")
                 else:
@@ -59,32 +98,10 @@ def preview():
 
 @app.route("/video_feed")
 def video_feed():
-    return Response(gen(Camera(), FaceApi()),
+    return Response(gen(Camera(), FaceApi(), Firestore(), Times()),
             mimetype="multipart/x-mixed-replace; boundary=frame")
 
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
-
-
-
-
-
-# camera = cv2.VideoCapture(0) # カメラCh.(ここでは0)を指定
- 
-# # 撮影＝ループ中にフレームを1枚ずつ取得(qキーで撮影終了)
-# while True:
-#     ret, frame = camera.read() # フレームを取得
-#     cv2.imshow('camera', frame) # フレームを画面に表示
- 
-#     # キー操作があればwhileループを抜ける
-#     if cv2.waitKey(1) & 0xFF == ord('q'):
-#         break
- 
-# # 撮影用オブジェクトとウィンドウの解放
-# camera.release()
-# cv2.destroyAllWindows()
     

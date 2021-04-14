@@ -15,6 +15,7 @@ class FaceApi(object):
         right = left + rect.width
         bottom = top + rect.height
         return ((left, top), (right, bottom))
+        
 
 
     def surround_rect(self, fram_image): # 検出した顔を長方形で囲み，画像を返す

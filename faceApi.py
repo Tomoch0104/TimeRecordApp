@@ -22,6 +22,7 @@ class FaceApi(object):
         # 認証KEYとENDPOINT
         KEY = "322c49b0462c4ee78fd110e7e73bb323"
 
+
         # This endpoint will be used in all examples in this quickstart.
         ENDPOINT = "https://tomoki-0104-mina.cognitiveservices.azure.com/"
 

@@ -111,6 +111,7 @@ def menu():
         loginID = request.form["loginID"]
 
         print(newID,"/",loginID)
+        print(type(newID),"/",type(loginID))
 
         # データベースへの送信処理
         # if():
@@ -122,6 +123,21 @@ def menu():
 def log():
     # print(id)
     return render_template("log.html")
+
+@app.route("/indexe1")
+def index_errorlog():
+    # print(id)
+    return render_template("index_errorlog.html")
+
+@app.route("/indexe2")
+def index_errornew():
+    # print(id)
+    return render_template("index_errornew.html")
+
+@app.route("/indexe3")
+def index_errorinput():
+    # print(id)
+    return render_template("index_errorinput.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

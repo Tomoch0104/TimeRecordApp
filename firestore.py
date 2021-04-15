@@ -8,7 +8,7 @@ class Firestore(object):
     cred = credentials.Certificate("autorecordapp-cbd37-firebase-adminsdk-59sxe-b959fef264.json")
     firebase_admin.initialize_app(cred)
 
-    def addDatabese(self, date, start_time, end_time, study_time, total_time_convert, time_count):
+    def addDatabese(self, date, start_time, end_time, study_time, total_time_convert, time_count, UserID):
 
         db = firestore.client()
 
@@ -21,7 +21,7 @@ class Firestore(object):
         }
 
         # 新しいコレクションとドキュメントを作成
-        doc_ref = db.collection("usersId").document(date).set(data, merge = True)
+        doc_ref = db.collection(UserID).document(date).set(data, merge = True)
 
     
     def checkNewID(self, newID, newPass):

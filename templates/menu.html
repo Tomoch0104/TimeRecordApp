@@ -6,16 +6,58 @@
     <div class="container" style="text-align:center;">
         <br>
         <h1 style="color:beige">AutoRecordAPP</h1>
-        <h5 style="color:beige">さんのメニュー</h5>
+        <h5 style="color:beige">{{ UserID }}さんのメニュー</h5>
         <br>
     </div>
     <br>
-
-    <div style="text-align:center;">
-        <a class="btn btn-primary btn-lg" href="/preview" role="button">撮影開始</a>
-    </div>
-    <br>
-    <div style="text-align:center;">
-        <a class="btn btn-dark btn-lg" href="/log" role="button">過去のデータを見る</a>
-    </div>
+    <form method="POST" action="/preview">
+        <div style="margin-left:40%;margin-right:40%;">
+            <select style="width: 12em;" name="UserName" class="form-select" aria-label="Default select example">
+                <option selected>データを送るアカウント</option>
+                <option value="{{ UserID }}">{{ UserID }}</option>
+            </select>
+        </div>
+        <div style="text-align:center;">
+            <br>
+            <input type="submit" class="btn btn-primary btn-lg" value="撮影開始">
+        </div>
+    </form>
+    <br><br>
+    <form method="POST" action="/log">
+        <div style="margin-left:40%;margin-right:40%;">
+            <select style="width: 12em;" name="UserName" class="form-select" aria-label="Default select example">
+                <option selected>取得するデータのアカウント</option>
+                <option value="{{ UserID }}">{{ UserID }}</option>
+            </select>
+        </div>
+        <br>
+        <div style="margin-left:40%;margin-right:40%;">
+            <select style="width: 12em;" name="Year" class="form-select" aria-label="Default select example">
+                <option selected>年を選択</option>
+                <option value="2021">2021年</option>
+                <option value="2022">2022年</option>
+            </select>
+        </div>
+        <div style="margin-left:40%;margin-right:40%;">
+            <select style="width: 12em;" name="Month" class="form-select" aria-label="Default select example">
+                <option selected>月を選択</option>
+                <option value="01">1月</option>
+                <option value="02">2月</option>
+                <option value="03">3月</option>
+                <option value="04">4月</option>
+                <option value="05">5月</option>
+                <option value="06">6月</option>
+                <option value="07">7月</option>
+                <option value="08">8月</option>
+                <option value="09">9月</option>
+                <option value="10">10月</option>
+                <option value="11">11月</option>
+                <option value="12">12月</option>
+            </select>
+        </div>
+        <div style="text-align:center;">
+            <br>
+            <input type="submit" class="btn btn-dark btn-lg" value="過去のデータを見る">
+        </div>
+    </form>
 {% endblock %}

@@ -50,11 +50,13 @@ class Firestore(object):
 
         doc_ref = db.collection(loginID).document("userInfo")
         doc = doc_ref.get()
-        key = doc.to_dict()["pass"]
-
-        # パスワードが存在するなら
-        if key == loginPass:
-            return "permission"
+        
+        if doc.exists:
+            key = doc.to_dict()["pass"]
+            if key == loginPass:
+                return "permission"
+            else:
+                return "No_permission"
         else:
             return "No_permission"
 

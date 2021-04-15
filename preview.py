@@ -91,9 +91,11 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/preview")
+@app.route("/preview", methods=["GET","POST"])
 def preview():
-    return render_template("preview.html")
+    UserName = request.form["UserName"]
+    print(UserName)
+    return render_template("preview.html", UserID=UserName)
 
 
 @app.route("/video_feed")
@@ -116,7 +118,7 @@ def menu():
         if loginID == "" and loginPass == "" and newID != "" and newPass != "":
             state = Firestore().checkNewID(newID, newPass)
             if state == "overlap":
-                return render_template("preview.html") # エラーページに返す(preview.htmlは仮)
+                return render_template("index_errornew.html") # エラーページに返す(preview.htmlは仮)
         # ログイン処理
         elif newID == "" and newPass == "" and loginID != "" and loginPass != "":
             state = Firestore().checkLoginID(loginID, loginPass)
@@ -124,17 +126,25 @@ def menu():
                 # loginIDを返す
                 print(state)
             else:
-                return render_template("preview.html") # loginID,loginPassが存在しないので専用のページに移動
+                print("errorlog")
+                return render_template("index_errorlog.html") # loginID,loginPassが存在しないので専用のページに移動
         else:
-            return render_template("preview.html") # idとpassの両方埋めてくださいのページに移動
+            return render_template("index_errorinput.html") # idとpassの両方埋めてくださいのページに移動
 
-
-    return render_template("menu.html")
+    print(loginID)
+    return render_template("menu.html", UserID=loginID)
     
-@app.route("/log")
+@app.route("/log", methods=["GET","POST"])
 def log():
-    # print(id)
-    return render_template("log.html")
+    if(request.method == "GET"):
+        print("get")
+    else:
+        # print(id)
+        UserName = request.form["UserName"]
+        Y = request.form["Year"]
+        M = request.form["Month"]
+        print(UserName,"/",Y,"/",M)
+        return render_template("log.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

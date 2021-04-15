@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
 
-<<<<<<< HEAD
-{% block body %} 
-<input type="text" name="userID">
-<button type="submit"></button>
-=======
+
 {% block body %}
     <br>
     <div class="container" style="text-align:center;">
@@ -13,13 +9,7 @@
         <h1 style="color:beige">AutoRecordAPP</h1>
         <h5 style="color:beige">あなたの研究時間，私が自動で記録します</h5>
         <br>
-    </div>
-<!-- <div class = "container" style="text-align:center;" class="mt-5">
-    <div class="alert alert-primary" role="alert">
-        <h1>AutoRecordAPP</h1>
-        <h5 style="text-align:center;">あなたの研究時間，私が自動で記録します</h5>
-    </div>
-</div>     -->
+    </div>  
     <br>
 <form class="m-5" action="/menu" method="POST">
     <div style="text-align:center;">
@@ -27,10 +17,10 @@
             <input type="text" name="loginID" class="form-control">
             <label for="floatingInput">LoginID</label>
         </div>
-        <!-- <div class="form-floating">
-            <input type="password" name="pass" class="form-control" id="floatingPassword" placeholder="Password">
+        <div class="form-floating">
+            <input type="password" name="loginPass" class="form-control">
             <label for="floatingPassword">Password</label>
-        </div> -->
+        </div>
     </div>
     <br>
     <div style="text-align:center;">
@@ -44,15 +34,14 @@
             <input type="text" name="newID" class="form-control">
             <label for="floatingInput">新規登録ID</label>
         </div>
-        <!-- <div class="form-floating">
-            <input type="password" name="pass" class="form-control" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Password</label>
-        </div> -->
+        <div class="form-floating">
+            <input type="password" name="newPass" class="form-control">
+            <label for="floatingPassword">新しいPassword</label>
+        </div>
     </div>
     <br>
     <div style="text-align:center;">
-        <button type="submit" class="btn btn-primary">登録</button>
+        <button type="submit" class="btn btn-primary">新規アカウント登録</button>
     </div>
 </form>
->>>>>>> 674ffd573c6a3ac5162da727471fc76d644ecc39
 {% endblock %}

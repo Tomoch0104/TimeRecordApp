@@ -39,8 +39,8 @@ def gen(camera, faceApi, firestore, times):
                     # end_time_utに値が入っていないかつ，start_time_utに値が入っているときのみ実行
                     if end_time_ut is None and start_time_ut is not None:
                         end_time = datetime.datetime.now()
-                        date = str(end_time.year) + "年" + str(end_time.month) + "月" + str(end_time.day) + "日" #　現在の日付
-                        end_time = str(end_time.hour) + "時" + str(end_time.minute) + "分"
+                        date = str(end_time.year) + str(end_time.month).zfill(2) + str(end_time.day).zfill(2) #　現在の日付
+                        end_time = str(end_time.hour).zfill(2) + ":" + str(end_time.minute).zfill(2)
                         end_time_ut = time.time() # 顔検出停止Unix時間
                         study_time = int(end_time_ut - start_time_ut) # 勉強時間を計算
                         total_time += study_time
@@ -71,7 +71,7 @@ def gen(camera, faceApi, firestore, times):
                         if start_time_day != start_time.day:
                             time_count = 1
                         start_time_day = start_time.day
-                        start_time = str(start_time.hour) + "時" + str(start_time.minute) + "分"
+                        start_time = str(start_time.hour).zfill(2) + ":" + str(start_time.minute).zfill(2)
                         start_time_ut = time.time() # 顔検出開始Unix時間
                     yield (b"--frame\r\n"
                         b"Content-Type: image/jpeg\r\n\r\n" + rect_image + b"\r\n")
@@ -106,16 +106,29 @@ def menu():
     if(request.method == "GET"):
         print("get")
     else:
-        # 
-        newID = request.form["newID"]
+        # ユーザー情報(idとpass)
         loginID = request.form["loginID"]
+        loginPass = request.form["loginPass"]
+        newID = request.form["newID"]
+        newPass = request.form["newPass"]
 
-        print(newID,"/",loginID)
+        # 新規登録処理
+        if loginID == "" and loginPass == "" and newID != "" and newPass != "":
+            state = Firestore().checkNewID(newID, newPass)
+            if state == "overlap":
+                return render_template("preview.html") # エラーページに返す(preview.htmlは仮)
+        # ログイン処理
+        elif newID == "" and newPass == "" and loginID != "" and loginPass != "":
+            state = Firestore().checkLoginID(loginID, loginPass)
+            if state == "permission":
+                # loginIDを返す
+                print(state)
+            else:
+                return render_template("preview.html") # loginID,loginPassが存在しないので専用のページに移動
+        else:
+            return render_template("preview.html") # idとpassの両方埋めてくださいのページに移動
 
-        # データベースへの送信処理
-        # if():
 
-        # print(id)
     return render_template("menu.html")
     
 @app.route("/log")

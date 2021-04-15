@@ -15,12 +15,20 @@ class FaceApi(object):
         right = left + rect.width
         bottom = top + rect.height
         return ((left, top), (right, bottom))
+        
 
 
     def surround_rect(self, fram_image): # 検出した顔を長方形で囲み，画像を返す
         # 認証KEYとENDPOINT
+<<<<<<< HEAD
         KEY = "0a2a288992fa4a1285dbf54270679e17"
         ENDPOINT = "https://kento.cognitiveservices.azure.com/"
+=======
+        KEY = "322c49b0462c4ee78fd110e7e73bb323"
+
+        # This endpoint will be used in all examples in this quickstart.
+        ENDPOINT = "https://tomoki-0104-mina.cognitiveservices.azure.com/"
+>>>>>>> 674ffd573c6a3ac5162da727471fc76d644ecc39
 
         # FaceClientを認証する
         face_client = FaceClient(ENDPOINT, CognitiveServicesCredentials(KEY))

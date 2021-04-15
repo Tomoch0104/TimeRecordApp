@@ -1,6 +1,15 @@
+<!DOCTYPE html>
 {% extends "base.html" %}
 
 {% block body %}
-<h1>Flask Streaming Test</h1>
-<img src="{{ url_for("video_feed") }}">
+
+<div class="alert alert-primary" role="alert">
+    <h1>AutoRecordAPP</h1>
+</div>
+
+<h1>監視中</h1>
+<div style="text-align:center;">
+    <img src="{{ url_for("video_feed") }}" height="500" border="3" alt="gazou">
+</div>
+
 {% endblock %}

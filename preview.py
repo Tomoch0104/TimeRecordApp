@@ -12,7 +12,7 @@ from camera import Camera
 from faceApi import FaceApi
 from firestore import Firestore
 from times import Times
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, request, redirect, url_for
 
 
 app = Flask(__name__)
@@ -101,6 +101,27 @@ def video_feed():
     return Response(gen(Camera(), FaceApi(), Firestore(), Times()),
             mimetype="multipart/x-mixed-replace; boundary=frame")
 
+@app.route("/menu", methods=["GET","POST"])
+def menu():
+    if(request.method == "GET"):
+        print("get")
+    else:
+        # 
+        newID = request.form["newID"]
+        loginID = request.form["loginID"]
+
+        print(newID,"/",loginID)
+
+        # データベースへの送信処理
+        # if():
+
+        # print(id)
+    return render_template("menu.html")
+    
+@app.route("/log")
+def log():
+    # print(id)
+    return render_template("log.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

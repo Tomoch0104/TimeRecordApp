@@ -8,8 +8,8 @@ from msrest.authentication import CognitiveServicesCredentials
 
 
 # 認証KEYとENDPOINT
-KEY = "自分のKEYを入力してください"
-ENDPOINT = "自分のENDPOINTを入力してください"
+KEY = "322c49b0462c4ee78fd110e7e73bb323"
+ENDPOINT = "https://tomoki-0104-mina.cognitiveservices.azure.com/"
 
 # FaceClientを認証する
 face_client = FaceClient(ENDPOINT, CognitiveServicesCredentials(KEY))

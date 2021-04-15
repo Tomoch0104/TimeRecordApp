@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
 
-
 {% block body %}
     <br>
     <div class="container" style="text-align:center;">
@@ -9,7 +8,13 @@
         <h1 style="color:beige">AutoRecordAPP</h1>
         <h5 style="color:beige">あなたの研究時間，私が自動で記録します</h5>
         <br>
-    </div>  
+    </div>
+<!-- <div class = "container" style="text-align:center;" class="mt-5">
+    <div class="alert alert-primary" role="alert">
+        <h1>AutoRecordAPP</h1>
+        <h5 style="text-align:center;">あなたの研究時間，私が自動で記録します</h5>
+    </div>
+</div>     -->
     <br>
 <form class="m-5" action="/menu" method="POST">
     <div style="text-align:center;">
@@ -36,12 +41,12 @@
         </div>
         <div class="form-floating">
             <input type="password" name="newPass" class="form-control">
-            <label for="floatingPassword">新しいPassword</label>
+            <label for="floatingPassword">新しいPasswordを入力</label>
         </div>
     </div>
     <br>
     <div style="text-align:center;">
-        <button type="submit" class="btn btn-primary">新規アカウント登録</button>
+        <button type="submit" class="btn btn-primary">登録</button>
     </div>
 </form>
 {% endblock %}

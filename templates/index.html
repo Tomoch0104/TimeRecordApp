@@ -16,22 +16,37 @@
     </div>
 </div>     -->
     <br>
-    
+<form class="m-5" action="/menu" method="POST">
     <div style="text-align:center;">
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">ID</label>
+            <input type="text" name="loginID" class="form-control">
+            <label for="floatingInput">LoginID</label>
         </div>
-        <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <!-- <div class="form-floating">
+            <input type="password" name="pass" class="form-control" id="floatingPassword" placeholder="Password">
             <label for="floatingPassword">Password</label>
-        </div>
+        </div> -->
     </div>
-
     <br>
     <div style="text-align:center;">
-        <a class="btn btn-primary" href="detail/{{  }}"></a>
-        <button type="button" class="btn btn-primary">ログイン</button>
-        <button type="button" class="btn btn-primary">新規登録</button>
+        <button type="submit" class="btn btn-primary" role="button">ログイン</button>
     </div>
+
+    <br><br>
+
+    <div style="text-align:center;">
+        <div class="form-floating mb-3">
+            <input type="text" name="newID" class="form-control">
+            <label for="floatingInput">新規登録ID</label>
+        </div>
+        <!-- <div class="form-floating">
+            <input type="password" name="pass" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+        </div> -->
+    </div>
+    <br>
+    <div style="text-align:center;">
+        <button type="submit" class="btn btn-primary">登録</button>
+    </div>
+</form>
 {% endblock %}

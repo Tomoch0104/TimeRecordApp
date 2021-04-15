@@ -22,3 +22,56 @@ class Firestore(object):
 
         # 新しいコレクションとドキュメントを作成
         doc_ref = db.collection("usersId").document(date).set(data, merge = True)
+
+    
+    def checkNewID(self, newID, newPass):
+
+        db = firestore.client()
+
+        data ={
+            "pass" : newPass
+        }
+
+        list_col = []
+        cols = db.collections()
+        [list_col.append(col.id) for col in cols]
+
+        for i in range(len(list_col)):
+            if list_col[i] == newID:
+                return "overlap"
+        
+        db.collection(newID).document("userInfo").set(data)
+        return "No_overlap"
+
+
+    def checkLoginID(self, loginID, loginPass):
+
+        db = firestore.client()
+
+        doc_ref = db.collection(loginID).document("userInfo")
+        doc = doc_ref.get()
+        key = doc.to_dict()["pass"]
+
+        # パスワードが存在するなら
+        if key == loginPass:
+            return "permission"
+        else:
+            return "No_permission"
+
+
+
+
+
+
+        
+
+        # list_col = []
+        # cols = db.collections()
+        # [list_col.append(col.id) for col in cols]
+
+        # for i in range(len(list_col)):
+        #     # 一致するコレクション名とパスワードがあるか確認
+        #     if list_col[i] == loginID:
+        #         return "permission"
+
+        # return "No_permission"

@@ -62,4 +62,3 @@ img.show()
 # # faceIDを"find similar"で使用するために保存する
 # # detected_faces[0]で最初に検出された顔のid
 # first_image_face_ID = detected_faces[0].face_id
-

@@ -14,6 +14,7 @@ from firestore import Firestore
 from times import Times
 import maketable
 from flask import Flask, render_template, Response, request, redirect, url_for
+import log
 
 
 app = Flask(__name__)
@@ -22,7 +23,7 @@ app = Flask(__name__)
 def gen(camera, faceApi, firestore, times, userID):
     count = 0
     time_count = 1
-    total_time = 0
+    total_time = None
     start_time = None
     end_time = None
     start_time_ut = None
@@ -30,9 +31,11 @@ def gen(camera, faceApi, firestore, times, userID):
     study_time = None
     start_time_day = None
 
+    total_time = firestore.addtotaltime(total_time, userID) * 60
+    print(total_time/60)
+
     while True:
         fram_image = camera.get_fram()
-
         if count == 100:
             count = 0 # countを0に戻す
             rect_image, judgment = faceApi.surround_rect(fram_image)
@@ -46,6 +49,7 @@ def gen(camera, faceApi, firestore, times, userID):
                         end_time_ut = time.time() # 顔検出停止Unix時間
                         study_time = int(end_time_ut - start_time_ut) # 勉強時間を計算
                         total_time += study_time
+                        print(total_time)
                         study_time = times.convertTime(study_time)
                         total_time_convert = times.convertTime(total_time)
 
@@ -136,16 +140,72 @@ def menu():
 
 
 @app.route("/log", methods=["GET","POST"])
+# 過去のデータを用意する関数
 def log():
+    # GETの時
     if(request.method == "GET"):
         print("get")
+        return render_template("/")
+    # POSTの時
     else:
+        # htmlから各入力値を格納
         UserID = request.form["UserName"]
         Y = request.form["Year"]
         M = request.form["Month"]
+        D = request.form["Day"]
+        # 2021##の文字列
         YM = Y + M
+        # 2021####の文字列
+        YMD = YM + D
+        # 特定月のデータを取得
+        # 表示用の文字列を用意
+        img_path = "fig/" + UserID + "/" + YM + ".png" 
+        Month = Y + "年" + M + "月の勉強時間"
+        # 表，グラフの作成
         table = maketable.makeTable(YM, UserID)
-        return render_template("log.html", Table = table)
+        # データをリストに格納
+        data = []
+        data.append(table)
+        data.append(UserID)
+        data.append(Month)
+        data.append(img_path)
+        # print(img_path)
+        # print(YM)
+        return render_template("log.html", Data=data)
+        # 特定月のデータを取得
+        # if(Y != "" and M != "" and D == ""):
+        #     # 表示用の文字列を用意
+        #     img_path = "fig/" + UserID + "/" + YM + ".png" 
+        #     Month = Y + "年" + M + "月の勉強時間"
+        #     # 表，グラフの作成
+        #     table = maketable.makeTable(YM, UserID)
+        #     # データをリストに格納
+        #     data = []
+        #     data.append(table)
+        #     data.append(UserID)
+        #     data.append(Month)
+        #     data.append(img_path)
+        #     # print(img_path)
+        #     # print(YM)
+        #     return render_template("log.html", Data=data)
+        # # 特定日のデータを取得
+        # elif(Y != "" and M != "" and D != ""):
+        #     # 表示用の文字列を用意
+        #     img_path = "fig_d/" + UserID + "/" + YM + "/" + D + ".png"
+        #     Day = Y + "年" + M + "月" + D + "日の勉強時間"
+        #     # 表，グラフの作成
+        #     table = maketable.makeDaytable(YMD, UserID)
+        #     # データをリストに格納
+        #     data = []
+        #     data.append(table)
+        #     data.append(UserID)
+        #     data.append(Day)
+        #     data.append(img_path)
+        #     # print(img_path)
+        #     return render_template("log.html", Data=data)
+        # # 適切な入力でないとエラーをはく
+        # else:
+        #     return render_template("input_error.html")
 
 
 if __name__ == "__main__":

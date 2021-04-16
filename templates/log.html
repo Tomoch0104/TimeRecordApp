@@ -6,12 +6,21 @@
     <div class="container" style="text-align:center;">
         <br>
         <h1 style="color:beige">AutoRecordAPP</h1>
-        <h5 style="color:beige">さんの記録</h5>
+        <h5 style="color:beige">{{ Data[1] }}さんの記録</h5>
         <br>
     </div>
     <br>
 
-    {{ Table }}
-    
+    <div style="text-align:center;">
+        {{ Data[0] }}
+    </div>
+    <br>
+    <div style="text-align:center;">
+        {{ Data[2] }}の記録
+        <br><br>
+        <!-- <img src={{ Data[3] }} width="500"> -->
+
+        <img src="fig/Tomoki0104/Test.jpeg">
+    </div>
 
 {% endblock %}

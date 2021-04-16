@@ -1,6 +1,7 @@
 import firebase_admin
 from firebase_admin import credentials
-from firebase_admin import firestore 
+from firebase_admin import firestore
+from datetime import datetime
 
 
 class Firestore(object):
@@ -8,7 +9,7 @@ class Firestore(object):
     cred = credentials.Certificate("autorecordapp-cbd37-firebase-adminsdk-59sxe-b959fef264.json")
     firebase_admin.initialize_app(cred)
 
-    def addDatabese(self, date, start_time, end_time, study_time, total_time_convert, time_count):
+    def addDatabese(self, date, start_time, end_time, study_time, total_time_convert, time_count, UserID):
 
         db = firestore.client()
 
@@ -21,7 +22,7 @@ class Firestore(object):
         }
 
         # 新しいコレクションとドキュメントを作成
-        doc_ref = db.collection("usersId").document(date).set(data, merge = True)
+        doc_ref = db.collection(UserID).document(date).set(data, merge = True)
 
     
     def checkNewID(self, newID, newPass):
@@ -59,6 +60,32 @@ class Firestore(object):
                 return "No_permission"
         else:
             return "No_permission"
+    
+    def addtotaltime(self, total_time, UserID):
+        today_time = datetime.now().strftime("%Y%m%d")
+        # print(today_time)
+        # print(UserID)
+        
+        db = firestore.client()
+
+        doc_ref = db.collection(UserID).document(today_time)
+        doc = doc_ref.get()
+
+        # 年月日が同じフォルダーが見つかった場合，Total_timeの初期値つづきからにする
+        if doc.exists:
+            # print("today")
+            return int(doc.to_dict()["total_time"])
+        else:
+            return 0
+        
+        # docs = db.collection(UserID).stream()
+
+        # for doc in docs:
+        #     print(doc)
+        #     if today_time == doc:
+        #         total_time = int(doc.to_dict()["total_time"])
+        #         return total_time
+        # return 0
 
 
 

@@ -1,7 +1,20 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.backends.backend_agg import FigureCanvasAgg
+from io import BytesIO
+import os
 
-def graphmaker(data):
+
+# 月の記録をグラフ化
+def graphmaker(UserID,data):
+    dir = "./templates/fig"
+    u_dir = dir + "/" + UserID
+
+    month = data[0][0][0:6]
+    if not os.path.exists(dir):
+        os.mkdir(dir)
+    if not os.path.exists(u_dir):
+        os.mkdir(u_dir)
     # 記録された日数
     len_d = len(data)
     
@@ -29,21 +42,32 @@ def graphmaker(data):
     
 
     
-    print(len(d_data_int),"\n-------\n",len(h_data_),"\n-------\n",d_data_)
+    # print(len(d_data_int),"\n-------\n",len(h_data_),"\n-------\n",d_data_)
 
-    plt.plot()
+    # グラフの作成
     plt.title(data[0][0][0:4]+ "_" + data[0][0][4:6])
     plt.xlabel("day")
     plt.xlim(0,31)
     plt.ylim(0,24)
     plt.ylabel("hours")
     plt.bar(d_data_int, h_data_)
+    # ローカルリポジトリに保存
+    plt.savefig(u_dir + "/" + month + ".png")
+    plt.close()
+# def figuremaker(date):
 
-    plt.show()
+#     return figure
+
+# 日の記録をグラフ化
+# def daygraphmaker(UserID, data):
+#     dir = "./templates/fig_d"
+#     u_dir = dir + "/" + UserID
+
     
-    return 1
+
 
 if __name__ == "__main__":
     data = [["20210405","400"],["20210407","500"],["20210428","900"],["20210409","460"]]
+    UserID = "Tomoki0104"
 
-    graph = graphmaker(data)
+    graph = graphmaker(UserID,data)

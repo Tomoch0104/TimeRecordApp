@@ -3,13 +3,25 @@
 
 {% block body %}
 
-<div class="alert alert-primary" role="alert">
-    <h1>AutoRecordAPP</h1>
+<br>
+<div class="container" style="text-align:center;">
+    <br>
+    <h1 style="color:beige">AutoRecordAPP</h1>
+    <h5 style="color:beige">{{ UserID }}さんを監視中</h5>
+    <br>
 </div>
 
-<h1>{{ UserID }}を監視中</h1>
+<br><br><br>
+
 <div style="text-align:center;">
-    <img src="{{ url_for("video_feed") }}" height="500" border="3" alt="gazou">
+    <img src="{{ url_for("video_feed", ID=UserID) }}" height="500" style="border:double 5px red" alt="gazou">
 </div>
+
+<br><br>
+<div style="text-align:center;">
+    <p>退出する際はこちらのボタンから退出ください．記録が反映されない場合があります．</p>
+    <a class="btn btn-dark btn-lg" href="/" value="off" name="state" role="button">退出する</a>
+</div>
+
 
 {% endblock %}

@@ -9,10 +9,11 @@
         <h5 style="color:beige">{{ UserID }}さんのメニュー</h5>
         <br>
     </div>
-    <br>
+    <br><br><br>
+    <div style="padding: 30px; margin-bottom: 20px; width: 500px;margin-left:auto;margin-right:auto; border: 1px dotted #333333; border-radius: 5px; background-color: rgb(169, 169, 169); color: #ffffff;">
     <form method="POST" action="/preview">
-        <div style="margin-left:40%;margin-right:40%;">
-            <select style="width: 12em;" name="UserName" class="form-select" aria-label="Default select example">
+        <div style="text-align:-webkit-center;">
+            <select style="width: 15em;" name="UserName" class="form-select" aria-label="Default select example">
                 <option selected>データを送るアカウント</option>
                 <option value="{{ UserID }}">{{ UserID }}</option>
             </select>
@@ -22,24 +23,26 @@
             <input type="submit" class="btn btn-primary btn-lg" value="撮影開始">
         </div>
     </form>
-    <br><br>
+</div>
+    <br>
+<div style="padding: 30px; margin-bottom: 20px; width: 500px;margin-left:auto;margin-right:auto; border: 1px dotted #333333; border-radius: 5px; background-color: rgb(169, 169, 169); color: #ffffff;">
     <form method="POST" action="/log">
-        <div style="margin-left:40%;margin-right:40%;">
-            <select style="width: 12em;" name="UserName" class="form-select" aria-label="Default select example">
+        <div style="text-align:-webkit-center;">
+            <select style="width: 15em;" name="UserName" class="form-select" aria-label="Default select example">
                 <option selected>取得するデータのアカウント</option>
                 <option value="{{ UserID }}">{{ UserID }}</option>
             </select>
         </div>
         <br>
-        <div style="margin-left:40%;margin-right:40%;">
-            <select style="width: 12em;" name="Year" class="form-select" aria-label="Default select example">
+        <div style="text-align:-webkit-center;">
+            <select style="width: 15em;" name="Year" class="form-select" aria-label="Default select example">
                 <option selected>年を選択</option>
                 <option value="2021">2021年</option>
                 <option value="2022">2022年</option>
             </select>
         </div>
-        <div style="margin-left:40%;margin-right:40%;">
-            <select style="width: 12em;" name="Month" class="form-select" aria-label="Default select example">
+        <div style="text-align:-webkit-center;">
+            <select style="width: 15em;" name="Month" class="form-select" aria-label="Default select example">
                 <option selected>月を選択</option>
                 <option value="01">1月</option>
                 <option value="02">2月</option>
@@ -55,9 +58,48 @@
                 <option value="12">12月</option>
             </select>
         </div>
-        <div style="text-align:center;">
+        <br>
+        <p style="color: #ffffff; text-align:-webkit-center;">月のデータを知りたい場合は日は入力しないでください</p>
+        <div style="text-align:-webkit-center;">
+            <select style="width: 15em;" name="Day" class="form-select" aria-label="Default select example">
+                <option selected>日を選択</option>
+                <option value="01">1日</option>
+                <option value="02">2日</option>
+                <option value="03">3日</option>
+                <option value="04">4日</option>
+                <option value="05">5日</option>
+                <option value="06">6日</option>
+                <option value="07">7日</option>
+                <option value="08">8日</option>
+                <option value="09">9日</option>
+                <option value="10">10日</option>
+                <option value="11">11日</option>
+                <option value="12">12日</option>
+                <option value="13">13日</option>
+                <option value="14">14日</option>
+                <option value="15">15日</option>
+                <option value="16">16日</option>
+                <option value="17">17日</option>
+                <option value="18">18日</option>
+                <option value="19">19日</option>
+                <option value="20">20日</option>
+                <option value="21">21日</option>
+                <option value="22">22日</option>
+                <option value="23">23日</option>
+                <option value="24">24日</option>
+                <option value="25">25日</option>
+                <option value="26">26日</option>
+                <option value="27">27日</option>
+                <option value="28">28日</option>
+                <option value="29">29日</option>
+                <option value="30">30日</option>
+                <option value="31">31日</option>
+            </select>
+        </div>
+        <div style="text-align:-webkit-center;">
             <br>
             <input type="submit" class="btn btn-dark btn-lg" value="過去のデータを見る">
         </div>
     </form>
+</div>
 {% endblock %}

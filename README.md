@@ -63,3 +63,8 @@ cred = credentials.Certificate("ご自身のjsonファイルをご使用くだ�
 > > menu.html<br>
 > > preview.html<br>
 > > fig
+
+
+アプリの様子
+
+<img src="./image/figure1.png">

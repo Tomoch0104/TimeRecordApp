@@ -23,6 +23,7 @@ class FaceApi(object):
         KEY = "ご自身のプロダクトキー"
         ENDPOINT = "ご自身のエンドポイント"
 
+
         # FaceClientを認証する
         face_client = FaceClient(ENDPOINT, CognitiveServicesCredentials(KEY))
 

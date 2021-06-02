@@ -6,7 +6,7 @@ from datetime import datetime
 
 class Firestore(object):
     # firestoreを初期化する(アプリケーションのデフォルトの認証情報を使用)
-    cred = credentials.Certificate("ご自身のjsonファイルをご使用ください")
+    cred = credentials.Certificate("facedetect-a3488-firebase-adminsdk-xrsxw-3bf86e0902.json")
     firebase_admin.initialize_app(cred)
 
     def addDatabese(self, date, start_time, end_time, study_time, total_time_convert, time_count, UserID):

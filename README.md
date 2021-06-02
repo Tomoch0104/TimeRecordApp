@@ -1,16 +1,14 @@
 # 時間記録Webアプリケーション
 
-大学で研究・勉強時間記録が義務化されたため，毎日の勉強時間管理を自動で行うWebアプリケーションを作った．
+大学で研究・勉強時間記録が義務化されたため，毎日の勉強時間管理を自動で行うWebアプリケーションを開発した．
 
 ## 注意
 <h3>
-firestoreの容量と，AzureAPIのクエリ上限のため，作成者らのデータベース，顔検知APIは使用できません．
-<br>
-そのため，ご使用の際は使用者自身のアカウントを作成の上，コードにプロダクトキー等を入力ください．
+セキュリティの問題上，各個人でFaceApi，Firestoreのキーやjsonファイルを用意してください．
 </h3>
 <br>
 
-## Azureの設定
+## AzureのFaceApiを設定
 以下のサイトから顔検出API用のプロダクトキーとエンドポイントを取得．<br>
 https://docs.microsoft.com/ja-jp/azure/cognitive-services/face/quickstarts/client-libraries?tabs=visual-studio&pivots=programming-language-csharp
 
@@ -25,7 +23,7 @@ ENDPOINT = "自分のENDPOINTを入力してください"
 
 ```
 
-## firebaseの設定
+## FirebaseのFiretoreを設定
 以下のにてプロジェクトを作成し，jsonファイルパスを入手してください<br>
 https://console.firebase.google.com/u/0/project/_/database
 

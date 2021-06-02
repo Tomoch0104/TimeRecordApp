@@ -20,8 +20,8 @@ class FaceApi(object):
 
     def surround_rect(self, fram_image): # 検出した顔を長方形で囲み，画像を返す
         # 認証KEYとENDPOINT
-        KEY = "ご自身のプロダクトキー"
-        ENDPOINT = "ご自身のエンドポイント"
+        KEY = "77b8e68bb381463a84e47bf1d54d7e1b"
+        ENDPOINT = "https://faceditection2.cognitiveservices.azure.com/"
 
 
         # FaceClientを認証する

@@ -65,6 +65,21 @@ cred = credentials.Certificate("ご自身のjsonファイルをご使用くだ�
 > > fig
 
 
-アプリの様子
+## アプリの様子
 
-<img src="./image/figure1.png">
+<br>
+
+### ログイン画面
+<img src="./image/loginform.png" width="500">
+<br>
+
+### メニュー
+<img src="./image/menu.png" width="400">
+<br>
+
+### データ取得
+<img src="./image/checkdata.png" width="400">
+<br>
+
+### 記録様子
+<img src="./image/preview.png" width="500">

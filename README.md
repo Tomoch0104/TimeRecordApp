@@ -69,17 +69,11 @@ cred = credentials.Certificate("ご自身のjsonファイルをご使用くだ�
 
 <br>
 
-### ログイン画面
-<img src="./image/loginform.png" width="500">
-<br>
+|**ログイン画面**|**メニュー**|
+|:---:|:---:|
+|<img src="./image/loginform.png">|<img src="./image/menu.png">|
 
-### メニュー
-<img src="./image/menu.png" width="400">
-<br>
 
-### データ取得
-<img src="./image/checkdata.png" width="400">
-<br>
-
-### 記録様子
-<img src="./image/preview.png" width="500">
+|**データ取得**|**記録様子**|
+|:---:|:---:|
+|<img src="./image/checkdata.png">|<img src="./image/preview.png">|

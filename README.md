@@ -2,6 +2,8 @@
 
 大学で研究・勉強時間記録が義務化されたため，毎日の勉強時間管理を自動で行うWebアプリケーションを開発した．
 
+Github URL：https://github.com/Tomoch0104/TimeRecordApp
+
 ## 注意
 <h3>
 セキュリティの問題上，各個人でFaceApi，Firestoreのキーやjsonファイルを用意してください．
@@ -32,7 +34,7 @@ https://console.firebase.google.com/u/0/project/_/database
 # firestore.py
 
 # firestoreを初期化する(アプリケーションのデフォルトの認証情報を使用)
-cred = credentials.Certificate("facedetect-a3488-firebase-adminsdk-xrsxw-c77c90bab7.json")
+cred = credentials.Certificate("ご自身のjsonファイルをご使用ください")
 ```
 
 ## フォルダ構成

@@ -32,7 +32,7 @@ https://console.firebase.google.com/u/0/project/_/database
 # firestore.py
 
 # firestoreを初期化する(アプリケーションのデフォルトの認証情報を使用)
-cred = credentials.Certificate("ご自身のjsonファイルをご使用ください")
+cred = credentials.Certificate("facedetect-a3488-firebase-adminsdk-xrsxw-c77c90bab7.json")
 ```
 
 ## フォルダ構成

@@ -44,14 +44,17 @@ def gen(camera, faceApi, firestore, times, userID):
     print(total_time/60)
 
     while True:
+        # カメラ画像を取得
         fram_image = camera.get_fram()
         if count == 100:
             count = 0 # countを0に戻す
+            # 顔検出
             rect_image, judgment = faceApi.surround_rect(fram_image)
             if judgment == 0: # 未検出
                 if rect_image is not None:
                     # end_time_utに値が入っていないかつ，start_time_utに値が入っているときのみ実行
                     if end_time_ut is None and start_time_ut is not None:
+                        # 終了時刻を取得
                         end_time = datetime.datetime.now()
                         date = str(end_time.year) + str(end_time.month).zfill(2) + str(end_time.day).zfill(2) #　現在の日付
                         end_time = str(end_time.hour).zfill(2) + ":" + str(end_time.minute).zfill(2)
@@ -59,6 +62,7 @@ def gen(camera, faceApi, firestore, times, userID):
                         study_time = int(end_time_ut - start_time_ut) # 勉強時間を計算
                         total_time += study_time
                         print(total_time)
+                        # firestore保存用に時間表示を変換
                         study_time = times.convertTime(study_time)
                         total_time_convert = times.convertTime(total_time)
 

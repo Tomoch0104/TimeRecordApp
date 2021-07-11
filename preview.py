@@ -19,18 +19,27 @@ import log
 
 app = Flask(__name__)
 
-
+# フレーム画像から顔検出，結果に応じて処理
 def gen(camera, faceApi, firestore, times, userID):
+    # フレームカウント数
     count = 0
+    # 顔検出成功カウンター
     time_count = 1
+    # 合計時間
     total_time = None
+    # 顔検出成功カウンター開始
     start_time = None
+    # 顔検出成功カウンター終了
     end_time = None
+    # 顔検出開始Unix時間
     start_time_ut = None
+    # 顔検出終了Unix時間
     end_time_ut = None
+    # 瞬間勉強時間
     study_time = None
+    # 勉強開始日
     start_time_day = None
-
+    # 合計時間の取得
     total_time = firestore.addtotaltime(total_time, userID) * 60
     print(total_time/60)
 

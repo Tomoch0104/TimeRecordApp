@@ -1,7 +1,9 @@
 from firebase_admin import firestore 
 import log
 
-
+"""
+実装途中
+"""
 
 def makeTable(request_time, user_ID):
     month_data = []

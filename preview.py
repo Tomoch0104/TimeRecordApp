@@ -91,17 +91,14 @@ def gen(camera, faceApi, firestore, times, userID):
             else:
                 print("frame is none")
 
-
 @app.route("/")
 def index():
     return render_template("index.html")
-
 
 @app.route("/preview", methods=["GET","POST"])
 def preview():
     UserName = request.form["UserName"]
     return render_template("preview.html", UserID=UserName)
-
 
 @app.route("/video_feed/<string:ID>")
 def video_feed(ID):
@@ -172,6 +169,9 @@ def log():
         # print(img_path)
         # print(YM)
         return render_template("log.html", Data=data)
+        """
+        試行錯誤
+        """
         # 特定月のデータを取得
         # if(Y != "" and M != "" and D == ""):
         #     # 表示用の文字列を用意

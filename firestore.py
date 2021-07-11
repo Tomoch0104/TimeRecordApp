@@ -6,7 +6,7 @@ from datetime import datetime
 
 class Firestore(object):
     # firestoreを初期化する(アプリケーションのデフォルトの認証情報を使用)
-    cred = credentials.Certificate("facedetect-a3488-firebase-adminsdk-xrsxw-c77c90bab7.json")
+    cred = credentials.Certificate("jsonのパス")
     firebase_admin.initialize_app(cred)
 
     def addDatabese(self, date, start_time, end_time, study_time, total_time_convert, time_count, UserID):
@@ -44,7 +44,7 @@ class Firestore(object):
         db.collection(newID).document("userInfo").set(data)
         return "No_overlap"
 
-
+    # ログインの認証
     def checkLoginID(self, loginID, loginPass):
 
         db = firestore.client()
@@ -61,6 +61,7 @@ class Firestore(object):
         else:
             return "No_permission"
     
+    # 勉強時間の更新
     def addtotaltime(self, total_time, UserID):
         today_time = datetime.now().strftime("%Y%m%d")
         # print(today_time)
@@ -78,6 +79,10 @@ class Firestore(object):
         else:
             return 0
         
+
+        """
+        試行錯誤
+        """
         # docs = db.collection(UserID).stream()
 
         # for doc in docs:
@@ -87,12 +92,6 @@ class Firestore(object):
         #         return total_time
         # return 0
 
-
-
-
-
-
-        
 
         # list_col = []
         # cols = db.collections()

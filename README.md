@@ -1,7 +1,7 @@
 # 時間記録Webアプリケーション
 
 ## thanks
-[![thanks](https://thankyouoss.herokuapp.com/thank/Tomoch0104/TimeRecordApp.svg)](http://localhost:3000/thank/Tomoch0104/TimeRecordApp.svg)
+[![thanks](https://thankyouoss.herokuapp.com/thank/Tomoch0104/TimeRecordApp.svg)](http://localhost:3000/thanks/Tomoch0104/TimeRecordApp.svg)
 
 大学で研究・勉強時間記録が義務化されたため，毎日の勉強時間管理を自動で行うWebアプリケーションを開発した．
 
